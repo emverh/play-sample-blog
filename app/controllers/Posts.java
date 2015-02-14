@@ -1,9 +1,11 @@
 package controllers;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import models.Post;
+import org.apache.commons.lang3.StringUtils;
 import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Http.RequestBody;
 import play.mvc.Result;
 import views.html.posts.show;
 
@@ -39,6 +41,17 @@ public class Posts extends Controller {
             response().setContentType("text/html; charset=utf-8");
             return notFound("No such blog post.");
         }
+    }
+
+    public static Result create() {
+        RequestBody body = request().body();
+        JsonNode textBody = body.asJson();
+
+        if(textBody != null){
+            return created("Expecting application/json request body.");
+        }
+
+        return badRequest();
     }
 
 }

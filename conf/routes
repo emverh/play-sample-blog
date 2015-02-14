@@ -5,6 +5,7 @@
 # Home page
 GET         /                    controllers.Application.index()
 GET         /posts               controllers.Posts.list()
+GET         /posts               controllers.Posts.create()
 GET         /posts/:id           controllers.Posts.show(id: String)
 POST        /login               controllers.Authentication.login(email: String)
 POST        /logout              controllers.Authentication.logout()
